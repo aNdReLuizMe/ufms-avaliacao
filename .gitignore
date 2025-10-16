@@ -1,0 +1,40 @@
+# sistema 
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Docker
+.docker/
+
+# Logs
+*.log
+logs/
+
+# temporários
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# backup do MySQL
+*.sql.bak
+
+# ambiente
+.env
+.env.local
+
+# Node modules
+node_modules/
+
+# PDFs gerados localmente
+relatorio.pdf
+*.pdf

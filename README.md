@@ -204,7 +204,7 @@ docker compose up -d
 
 ## Autor
 
-**[Andre Pereira](https://www.linkedin.com/in/andreluizme/){:target="\_blank"}**
+<a href="https://www.linkedin.com/in/andreluizme/" target="_blank">Andre Pereira</a>
 
 - Avaliação do Módulo 3 - Banco de Dados e Controle de Versão
 - UFMS / Tecnologia da Informação ~ Out 2025

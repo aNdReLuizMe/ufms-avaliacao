@@ -84,4 +84,4 @@ BEGIN
         WHERE id = NEW.livro_id;
     END IF;
 END//
-DELIMITER;
+DELIMITER ;

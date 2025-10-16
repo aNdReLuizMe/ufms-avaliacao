@@ -1,17 +1,17 @@
-# Sistema de Biblioteca - Banco de Dados - (Avaliação UFMS)
+# Sistema de Biblioteca — Banco de Dados (Avaliação UFMS)
 
 Projeto acadêmico de modelagem e manipulação de banco de dados utilizando MySQL e Docker, com controle de versão via Git/GitHub.
 
 ## Descrição do Projeto
 
-Sistema simple de gerenciamento de biblioteca que permite:
+Sistema simples de gerenciamento de biblioteca que permite:
 
 - Cadastro de usuários
 - Cadastro de livros
 - Controle de empréstimos e devoluções
 - Consultas e relatórios diversos
 
-## strutura do Banco de Dados
+## Estrutura do Banco de Dados
 
 ### Entidades
 
@@ -80,7 +80,7 @@ cd ufms-avaliacao
 2. **Inicie o container MySQL**
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 3. **Aguarde o MySQL inicializar** (cerca de 30 segundos)
@@ -88,14 +88,33 @@ docker-compose up -d
 4. **Acesse o MySQL**
 
 ```bash
-docker exec -it biblioteca mysql -u user -p
-# Senha: 123
+docker exec -it biblioteca mysql -u user -p123
 ```
 
-5. **Os scripts SQL serão executados automaticamente** na ordem:
+5. **Os scripts SQL serão executados automaticamente (apenas na primeira inicialização do volume)** na ordem:
    - `01-schema.sql` - Cria as tabelas
-   - `02-data.sql` - Insere dados de exemplo populando as tableas
+   - `02-data.sql` - Insere dados de exemplo populando as tabelas
    - `03-queries.sql` - Consultas disponíveis em separado
+
+### Notas importantes sobre a inicialização
+
+- Os arquivos em `sql/` são executados automaticamente pelo MySQL apenas quando o volume de dados é criado pela primeira vez.
+- Após a primeira execução, subir o container novamente não reexecuta os scripts. Para repetir a carga do zero, apague o volume (veja abaixo em “Como Parar/Resetar”).
+
+### Verificação rápida
+
+```bash
+docker exec -it biblioteca mysql -u user -p123 -e "USE biblioteca_db; SELECT COUNT(*) AS usuarios FROM usuarios; SELECT COUNT(*) AS livros FROM livros; SELECT COUNT(*) AS emprestimos FROM emprestimos;"
+```
+
+### Executar scripts manualmente (sem resetar o volume)
+
+Se o banco já está criado e você apenas quer repopular dados de exemplo:
+
+```bash
+# Executar apenas o script de dados
+docker exec -i biblioteca sh -c "mysql -uuser -p123 biblioteca_db < /docker-entrypoint-initdb.d/02-data.sql"
+```
 
 ## Consultas Disponíveis
 
@@ -165,19 +184,22 @@ ufms-avaliacao/
 │   ├── 02-data.sql        # Inserção de dados
 │   └── 03-queries.sql     # Consultas e manipulações
 ├── docs/
-│   └── diagrama-er.md     # Diagrama entidade-relacionamento
+│   └── diagram-er.md      # Diagrama entidade-relacionamento
 ├── README.md              # Este arquivo
 └── .gitignore             # Arquivos ignorados pelo Git
 ```
 
-## Como Parar o Projeto
+## Como Parar/Resetar o Projeto
 
 ```bash
 # Parar containers
-docker-compose down
+docker compose down
 
-# Parar e remover volumes (apaga dados)
-docker-compose down -v
+# Parar e remover volumes (apaga dados e força reexecução dos scripts em sql/)
+docker compose down -v
+
+# Subir novamente após reset (reexecutará 01/02/03)
+docker compose up -d
 ```
 
 ## Autor

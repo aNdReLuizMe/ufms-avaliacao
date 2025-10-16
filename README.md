@@ -112,7 +112,7 @@ docker exec -it biblioteca mysql -u user -p123 -e "USE biblioteca_db; SELECT COU
 Se o banco já está criado e você apenas quer repopular dados de exemplo:
 
 ```bash
-# Executar apenas o script de dados
+# pra executar apenas o script de dados
 docker exec -i biblioteca sh -c "mysql -uuser -p123 biblioteca_db < /docker-entrypoint-initdb.d/02-data.sql"
 ```
 
@@ -195,16 +195,16 @@ ufms-avaliacao/
 # Parar containers
 docker compose down
 
-# Parar e remover volumes (apaga dados e força reexecução dos scripts em sql/)
+# Parar e remover volumes
 docker compose down -v
 
-# Subir novamente após reset (reexecutará 01/02/03)
+# Subir novamente após reset (reexecutará os scripts 01 - cria db/tables / 02 - popula tudo / 03 - executa queries)
 docker compose up -d
 ```
 
 ## Autor
 
-**[Andre Pereira](https://www.linkedin.com/in/andreluizme/)**
+**[Andre Pereira](https://www.linkedin.com/in/andreluizme/){:target="\_blank"}**
 
 - Avaliação do Módulo 3 - Banco de Dados e Controle de Versão
 - UFMS / Tecnologia da Informação ~ Out 2025

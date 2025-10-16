@@ -205,9 +205,9 @@ docker compose up -d
 ## Autor
 
 **[Andre Pereira](https://www.linkedin.com/in/andreluizme/)**
-Avaliação do Módulo 3 - Banco de Dados e Controle de Versão
-UFMS / Tecnologia da Informação
-Out 2025
+
+- Avaliação do Módulo 3 - Banco de Dados e Controle de Versão
+- UFMS / Tecnologia da Informação ~ Out 2025
 
 ## Licença
 
